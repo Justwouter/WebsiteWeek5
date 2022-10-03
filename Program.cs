@@ -4,12 +4,14 @@ namespace Pretpark
 {
     class Program
     {
+        static int counter = 1;
         static void Main(string[] args)
         {
 
             TcpListener server = new TcpListener(new System.Net.IPAddress(new byte[] { 127,0,0,1 }), 5000);
             server.Start();
             while(true){
+                //Console.WriteLine("Started");
                 using Socket connectie = server.AcceptSocket();
                 using Stream request = new NetworkStream(connectie);
                 using StreamReader requestLezer = new StreamReader(request);
@@ -30,7 +32,19 @@ namespace Pretpark
                     char[] bytes = new char[(int)contentLength];
                     requestLezer.Read(bytes, 0, (int)contentLength);
                 }
-                connectie.Send(System.Text.Encoding.ASCII.GetBytes("HTTP/1.0 200 OK\r\nContent-Type: text/html\r\nContent-Length: 11\r\n\r\n"));
+                //URL routing
+                string data = File.ReadAllText("Home.html");
+                Console.WriteLine(url);
+                if(url.Equals("/Contact",StringComparison.OrdinalIgnoreCase)){
+                    data = File.ReadAllText("Contact.html");
+                    break;
+                }
+                else if(url.Equals("/Teller",StringComparison.OrdinalIgnoreCase)){
+                    data = "<h1>"+counter+"</h1>";
+                    counter++;
+                }
+
+                connectie.Send(System.Text.Encoding.ASCII.GetBytes("HTTP/1.0 200 OK\r\nContent-Type: text/html\r\nContent-Length: 11\r\n\r\n"+data));
 
             }
            
