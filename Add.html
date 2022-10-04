@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <title>Addition Page</title>
+    <body>
+        <div>
+            <h1 id="Calculator">hello!</h1>
+            
+        <div>   
+        <script type="text/javascript">
+            function GetURLParameter(sParam){
+                var sPageURL = window.location.search.substring(1);
+                var sURLVariables = sPageURL.split('&');
+                for (var i = 0; i < sURLVariables.length; i++){
+                    var sParameterName = sURLVariables[i].split('=');
+                    if (sParameterName[0] == sParam){
+                        return sParameterName[1];
+                    }
+                }
+            }
+            var a = parseInt(GetURLParameter("a"));
+            var b = parseInt(GetURLParameter("b"));
+            document.getElementById("Calculator").innerHTML = (a+b).toString();
+
+        </script>
+        
+        
+        
+    </body>
+<html>

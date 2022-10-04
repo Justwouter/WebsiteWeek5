@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <title>Addition w/Button Page</title>
+    <body>
+        <div>
+            <h1 id="CounterWrap">De counter staat op: <h1 id="Counter">1</h1> Klik deze link om te verhogen <h4 id="Link"><a href="/">LINK</a></h4>
+        </h1>
+            
+        <div>   
+        <script type="text/javascript">
+            window.onload() = function() {
+                var redir = document.getElementById("Link");
+                redir.onclick = function(){
+                    
+                }
+            }
+            function GetURLParameter(sParam){
+                var sPageURL = window.location.search.substring(1);
+                var sURLVariables = sPageURL.split('&');
+                for (var i = 0; i < sURLVariables.length; i++){
+                    var sParameterName = sURLVariables[i].split('=');
+                    if (sParameterName[0] == sParam){
+                        return sParameterName[1];
+                    }
+                }
+            }
+            var a = parseInt(GetURLParameter("a"))
+            if(a > 0)
+                document.getElementById("Counter").innerHTML = a;
+
+        </script>
+        
+        
+        
+    </body>
+<html>
