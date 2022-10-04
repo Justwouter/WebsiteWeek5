@@ -40,7 +40,7 @@ namespace Pretpark
                 }
                 else if(url.Equals("/contact")){
                     data = File.ReadAllText("Contact.html");
-                    break;
+                    //break;
                 }
                 else if(url.Equals("/teller")){
                     data = "<h1>"+counter+"</h1>";
@@ -48,10 +48,10 @@ namespace Pretpark
                 }
                 else if(url.Contains("/add")){
                     data = File.ReadAllText("Add.html");
-                    break;  
+                    //break;  
                 }
                 else if(url.Contains("/mijnteller")){
-                    
+                    data = File.ReadAllText("AddWithButton.html");
                 }
                 else{
                     data = File.ReadAllText("404.html");
