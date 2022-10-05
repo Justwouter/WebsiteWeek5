@@ -33,31 +33,36 @@ namespace Pretpark
                     requestLezer.Read(bytes, 0, (int)contentLength);
                 }
                 //URL routing
-                string data;
-                Console.WriteLine(url);
-                if(url.Equals("/")){
-                    data = File.ReadAllText("Home.html");
-                }
-                else if(url.Equals("/contact")){
-                    data = File.ReadAllText("Contact.html");
-                    //break;
-                }
-                else if(url.Equals("/teller")){
-                    data = "<h1>"+counter+"</h1>";
-                    counter++;
-                }
-                else if(url.Contains("/add")){
-                    data = File.ReadAllText("Add.html");
-                    //break;  
-                }
-                else if(url.Contains("/mijnteller")){
-                    data = File.ReadAllText("AddWithButton.html");
+                if(!url.Contains("/css")){
+                    string data;
+                    Console.WriteLine(url);
+                    if(url.Equals("/")){
+                        data = File.ReadAllText("Pages\\Home.html");
+                    }
+                    else if(url.Equals("/contact", StringComparison.OrdinalIgnoreCase)){
+                        data = File.ReadAllText("Pages\\Contact.html");
+                    }
+                    else if(url.Equals("/teller", StringComparison.OrdinalIgnoreCase)){
+                        data = "<h1>"+counter+"</h1>";
+                        counter++;
+                    }
+                    else if(url.Contains("/add", StringComparison.OrdinalIgnoreCase)){
+                        data = File.ReadAllText("Pages\\Add.html");
+                    }
+                    else if(url.Contains("/mijnteller", StringComparison.OrdinalIgnoreCase)){
+                        data = File.ReadAllText("Pages\\AddWithButton.html");
+                    }
+                    else{
+                        data = File.ReadAllText("Pages\\404.html");
+                    }
+                    connectie.Send(System.Text.Encoding.ASCII.GetBytes("HTTP/1.0 200 OK\r\nContent-Type: text/html\r\nContent-Length: 11\r\n\r\n"+data));
                 }
                 else{
-                    data = File.ReadAllText("404.html");
+                    Console.WriteLine(url);
+                    var data = url.Replace("/", "\\\\");
+                    data = File.ReadAllText("Pages"+data);
+                    connectie.Send(System.Text.Encoding.ASCII.GetBytes("HTTP/1.0 200 OK\r\nContent-Type: text/css\r\nContent-Length: 11\r\n\r\n"+data));
                 }
-
-                connectie.Send(System.Text.Encoding.ASCII.GetBytes("HTTP/1.0 200 OK\r\nContent-Type: text/html\r\nContent-Length: 11\r\n\r\n"+data));
 
             }
            
