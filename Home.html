@@ -3,5 +3,10 @@
         <h1>Welkom bij de website van Pretpark <a href="https://nl.wikipedia.org/wiki/Den_Haag">Den Haag!</a></h1>
         <h2>Hello!</h2>
         <h4><a href="/Contact">LINK</a></h4>
+        <h3>Uw browser is: <a id="UserAgent"></a></h3>
     <body>
+        <script>
+            var browserAgent = navigator.userAgent;
+            document.getElementById("UserAgent").innerText = browserAgent;
+        </script>
 <html>
