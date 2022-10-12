@@ -61,7 +61,7 @@ namespace Pretpark
                     Console.WriteLine(url);
                     var data = url.Replace("/", "\\\\");
                     data = File.ReadAllText("Pages"+data);
-                    connectie.Send(System.Text.Encoding.ASCII.GetBytes("HTTP/1.0 200 OK\r\nContent-Type: text/css\r\nContent-Length: 11\r\n\r\n"+data));
+                    connectie.Send(System.Text.Encoding.ASCII.GetBytes("HTTP/1.0 200 OK\r\nContent-Type: text/css\r\nContent-Length: "+data.Length+"\r\n\r\n"+data));
                 }
 
             }
